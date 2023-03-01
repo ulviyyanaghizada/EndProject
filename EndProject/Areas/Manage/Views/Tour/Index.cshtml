@@ -1,0 +1,57 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+@model IEnumerable<Tour>
+<div class="container">
+	<div class="card mt-5">
+		<div class="table-responsive">
+			<table class="table table-striped table-bordered table-responsive">
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Image</th>
+						<th>Picture</th>
+						<th>Name</th>
+						<th>Title</th>
+			
+						<th>GroupSize</th>
+						<th>Price</th>
+						<th>Feature</th>
+						
+						<th>Location</th>
+						<th>Country</th>
+						<th colspan="2">Operation</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (var p in Model)
+					{
+						<tr>
+							<td>@p.Id</td>
+							<td><img width="40" src="~/assets/images/tour/@p.TourImages?.FirstOrDefault(pi=>pi.IsPrimary == true)?.ImageUrl"> </td>
+							<td><img width="40" src="~/assets/images/tour/@p.PictureUrl"> </td>
+							<td>@p.Name</td>
+							<td>@p.Title</td>
+							<td>@p.GroupSize</td>
+							<td>@p.Price</td>
+							<td>
+								@foreach (var feature in p?.TourFeatures.Where(pc => pc.TFeatureId == p.Id))
+								{
+									<span>@feature.TFeature.Title</span>
+								}
+							</td>
+							
+							<td>@p.Location</td>
+							<td>@p.Country.Name</td>
+							<td><a class="btn btn-danger" asp-area="Manage" asp-controller="Tour" asp-action="Delete" asp-route-id="@p.Id">Delete</a></td>
+							<td><a class="btn btn-info" asp-area="Manage" asp-controller="Tour" asp-action="Update" asp-route-id="@p.Id">Update</a></td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+

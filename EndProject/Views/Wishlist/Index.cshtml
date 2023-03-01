@@ -1,0 +1,62 @@
+﻿@model HomeVM
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Banner Section -->
+<section class="inner-banner">
+    <div class="image-layer" style="background-image: url('https://themeim.com/demo/treker/images/background/banner-image-1.jpg');"></div>
+    <div class="auto-container">
+        <div class="content-box">
+            <h2>Wishlist</h2>
+            <div class="bread-crumb">
+                <ul class="clearfix">
+                    <li><span class="icon-home fa fa-home"></span><a asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li class="current">Wishlist</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<!--End Banner Section -->
+<!--Wishlist Section-->
+<section class="wishlist-section">
+    <div class="auto-container">
+        <!--Cart Outer-->
+        <div class="wishlist-outer">
+            <div class="table-outer">
+                <div class="table-box">
+                    <table class="wishlist-table">
+                        <tbody>
+                            @foreach (var item in (Model.Wishlist.Wishlists ?? new List<ProductWishlistItemVM>()))
+                            {
+                                
+                            <tr>
+                                <td class="prod-column image-column">
+                                    <div class="image-box">
+                                            <figure class="prod-thumb"><a href="~/assets/#"><img src="~/assets/images/product/@item.Product.ProductImages?.FirstOrDefault(pi=>pi.IsPrimary == true)?.ImageUrl" alt=""></a></figure>
+                                    </div>
+                                </td>
+                                <td class="prod-column info-column">
+                                    <div class="info-box">
+                                        <h4 class="prod-title">@item.Product.Title</h4>
+                                            <div class="price">Price : <span>$@item.Product.SellPrice</span></div>
+                                   
+                                    </div>
+                                </td>
+                                <td class="avail">
+                       
+                                        <div class="add-btn"><a asp-controller="Wishlist" asp-action="AddBasket" asp-route-Id="@item.Product.Id" class="theme-btn add-cart-btn"><span><i class="far fa-shopping-cart"></i>Add To Cart</span></a></div>
+                                </td>
+                            </tr>
+                            }
+                          
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Cart Section-->

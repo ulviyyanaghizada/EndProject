@@ -1,0 +1,66 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model HomeVM
+    <!-- Banner Section -->
+    <section class="inner-banner">
+    <div class="image-layer" style="background-image: url('https://themeim.com/demo/treker/images/background/banner-image-1.jpg');"></div>
+        <div class="auto-container">
+            <div class="content-box">
+                <h2>Term and Condition</h2>
+                <div class="bread-crumb">
+                    <ul class="clearfix">
+                    <li><span class="icon-home fa fa-home"></span><a asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li class="current">Policy and Privacy</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--End Banner Section -->
+
+    <!--Terms & Section-->
+    <section class="terms-section">
+        <div class="auto-container">
+            <div class="content-box">
+                <div class="row clearfix">
+
+                    <div class="text-col col-lg-6 col-md-12 col-sm-12">
+                        <!--Block-->
+                    @for (int i = 0; i < (Model.Conditions.Count() / 2); i++)
+                    {
+
+                        <div class="term-block">
+                            <div class="inner">
+                                <div class="title">
+                                    <h5>@Model.Conditions[i].Title</h5>
+                                </div>
+                                <div class="text">@Model.Conditions[i].Description</div>
+                            </div>
+                        </div>
+                    }
+
+                    </div>
+
+                    <div class="text-col col-lg-6 col-md-12 col-sm-12">
+                        <!--Block-->
+                    @for (int i = Model.Conditions.Count() / 2; i < Model.Conditions.Count(); i++)
+                    {
+                        <div class="term-block">
+                            <div class="inner">
+                                <div class="title">
+                                    <h5>@Model.Conditions[i].Title</h5>
+                                </div>
+                                <div class="text">@Model.Conditions[i].Description</div>
+                            </div>
+                        </div>
+                    }
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+

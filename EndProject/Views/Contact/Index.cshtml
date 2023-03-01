@@ -1,0 +1,89 @@
+﻿@using EndProject.Models.ViewModels;
+@model ContactVM
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Banner Section -->
+<section class="inner-banner">
+    <div class="image-layer" style="background-image: url('https://themeim.com/demo/treker/images/background/banner-image-1.jpg');"></div>
+    <div class="auto-container">
+        <div class="content-box">
+            <h2>Contact</h2>
+            <div class="bread-crumb">
+                <ul class="clearfix">
+                    <li><span class="icon-home fa fa-home"></span><a asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li class="current">Contact</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<!--End Banner Section -->
+<!--Contact Section-->
+<section class="contact-section">
+    <div class="floated-icon right"><img src="~/assets/images/resource/stones-right-3.svg" alt="" title=""></div>
+    <div class="floated-icon right-2"><img src="~/assets/images/resource/stones-right-2.svg" alt="" title=""></div>
+    <div class="auto-container">
+
+        <div class="info-section">
+       
+        </div>
+        <div class="title-box centered">
+            <h2><span>How can we Help?</span></h2>
+            <div class="text">Contact us and get strapped in for a better adventure experience in your life-time. Just look for opportunity to be with nature. </div>
+        </div>
+        <div class="form-box site-form">
+            <div class="contact-form">
+                <form method="post" asp-action="postContact" asp-controller="Contact    ">
+                    <div class="row clearfix">
+                        <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                            <div class="f-label">Your Name <i>*</i></div>
+                            <div class="field-inner">
+                                <input asp-for="FullName" required>
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                            <div class="f-label">Your Email <i>*</i></div>
+                            <div class="field-inner">
+                                <input asp-for="Email" required>
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                            <div class="f-label">Your Phone <i>*</i></div>
+                            <div class="field-inner">
+                                <input asp-for="PhoneNumber" >
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                            <div class="f-label">Your Subject <i>*</i></div>
+                            <div class="field-inner">
+                                <input asp-for="subject" required>
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-12 col-md-12 col-sm-12">
+                            <div class="f-label">Write Message</div>
+                            <div class="field-inner">
+                                <textarea asp-for="Message"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-12 col-md-12 col-sm-12">
+                            <button type="submit" asp-action="postContact" asp-controller="Contact" class="theme-btn btn-style-two"><span>Submit Now<i class="icon far fa-angle-right"></i></span></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+</section>
+
+<section class="map-section">
+    <!--Map Box-->
+    <div class="map-box">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3608.443278930481!2d55.30389370154939!3d25.25566963673736!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f43254acb00ad%3A0xdbc6ee1faaf3a3c6!2sBank%20Street%20Building%20-%20UBL%20Buidling%20Bur%20Dubai%2C%20Dubai%20-%20D79%20-%20Al%20Mankhool%20-%20Dubai!5e0!3m2!1sen!2sae!4v1636553029034!5m2!1sen!2sae" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+    </div>
+</section>
+

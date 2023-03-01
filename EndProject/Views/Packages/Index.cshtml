@@ -1,0 +1,172 @@
+﻿@model Trekking
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+    <!--Page Info-->
+    <section class="page-info">
+        <div class="auto-container">
+            <div class="links">
+                <a href="~/assets/index.html">Home</a> &ensp;<i class="fa fa-caret-right"></i>&ensp; <a href="~/assets/trekking.html">Trekking</a> &ensp;<i class="fa fa-caret-right"></i>&ensp; <span class="current">Trekking Details</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Banner Section -->
+ 	<section class="packages-banner style-two" style="background-image: url(~/assets/images/trekking/@Model.PictureUrl);">
+	<img src="~/assets/images/trekking/@Model.PictureUrl" />
+	
+	</section>
+    <!--End Banner Section -->
+
+	<!-- Package Detail Section -->
+	<section class="package-detail-section">
+		<div class="auto-container">
+		
+			<!-- Upper Box -->
+			<div class="upper-box">
+				<div class="clearfix">
+					<div class="pull-left">
+						<h4>@Model.Name</h4>
+					</div>
+					<div class="pull-right">
+						<div class="price">$@Model.Price<span>/Person</span></div>
+					</div>
+				</div>
+			</div>
+			
+			<!-- Package Info Box -->
+			<div class="package-info-box">
+				<div class="inner-container d-flex justify-content-between align-items-center">
+					
+					<!-- Package Info Block -->
+					<div class="package-info-block">
+						<div class="inner-box">
+							<div class="icon"><img src="~/assets/images/icons/duration.svg" alt="" /></div>
+							<strong>Duration</strong>
+							@Model.TrekkingDays.Count Days
+						</div>
+					</div>
+					
+					<!-- Package Info Block -->
+					<div class="package-info-block">
+						<div class="inner-box">
+							<div class="icon"><img src="~/assets/images/icons/speedometer.svg" alt="" /></div>
+							<strong>Difficulty</strong>
+							@Model.Difficulty.Name
+						</div>
+					</div>
+					
+					<!-- Package Info Block -->
+					<div class="package-info-block">
+						<div class="inner-box">
+							<div class="icon"><img src="~/assets/images/icons/team-group.svg" alt="" /></div>
+							<strong>Group Size</strong>
+							@Model.GroupSize Person
+						</div>
+					</div>
+					
+				</div>
+			</div>
+			<!-- End Package Info Box -->
+			
+			
+			<!-- Rating Box -->
+			
+			<div class="row clearfix">
+				<!-- Content Column -->
+				<div class="content-column col-xl-8 col-lg-7 col-md-12 col-sm-12">
+					<h5>About @Model.Name</h5>
+					<p>@Model.Description</p>
+					<div class="feature-box">
+						<h5>Features</h5>
+						<ul class="feature-list">
+                            @foreach (var item in Model.TrekkingFeatures?.Where(f=>f.TrekkingId==Model.Id))
+                        {
+                            
+							<li>@item.TrFeature.Title</li>
+                        }
+							
+						</ul>
+					</div>
+					<div class="facility-box">
+						<h5>Facilities</h5>
+						<div class="row clearfix">
+                            @foreach (var item in Model.TrekkingFacilities?.Where(f=>f.TrekkingId == Model.Id))
+                        {
+                            
+							<div class="column col-lg-4 col-md-4 col-sm-12">
+								<div class="facility-option"><span class="icon"><img src="~/assets/images/resource/@item.TrFacilitie.IconUrl" alt="" /></span>@item.TrFacilitie.Title</div>
+							</div>
+                        }
+							
+						</div>
+					</div>
+					
+					<!-- Itinerary Box -->
+					<div class="itinerary-box">
+						<h5>Itinerary</h5>
+						<div class="days-outer">
+						
+							<!-- Day Box -->
+                            @foreach (var item in Model.TrekkingDays)
+                        {
+                            
+							<div class="day-box">
+								<div class="title">@item.Name</div>
+								<div class="day-text">@item.Description</div>
+							</div>
+                        }
+							
+							
+						</div>
+					</div>
+					<!-- End Itinerary Box -->
+					
+					<!-- Gallery Box -->
+					<div class="gallery-box">
+						<h5>Gallery</h5>
+						<div class="single-item-carousel owl-carousel owl-theme">
+                            @foreach (var item in Model.TrekkingImages)
+                        {
+                            
+							<div class="slide">
+								<div class="image">
+									<img src="~/assets/images/trekking/@item.ImageUrl" alt="" />
+								</div>
+							</div>
+                        }
+							
+						</div>
+					</div>
+					
+					
+					
+				</div>
+				<!-- Sidebar Column -->
+				<div class="sidebar-column col-xl-4 col-lg-5 col-md-12 col-sm-12">
+					<div class="inner-column">
+					
+						
+						<!-- Buy Treker Widget -->
+						<div class="sidebar-widget buy-treker-widget">
+							<div class="widget-content" style="background-image: url('https://themeim.com/demo/treker/images/background/buy.jpg')">
+								<div class="logo">
+									<a href="~/assets/index.html"><img src="~/assets/images/icons/buy-treker.svg" alt="" /></a>
+								</div>
+								<div class="text">Awesome Trekking Travel <br> Theme !</div>
+                            <a asp-controller="Trekking" asp-action="Index" class="theme-btn buy-now">View All</a>
+							</div>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+			
+		</div>
+	</section>
+	<!-- End Package Detail Section -->
+
+

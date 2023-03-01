@@ -1,0 +1,159 @@
+﻿@model TrekkingVM
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+    <!-- Banner Section -->
+    <section class="inner-banner">
+    <div class="image-layer" style="background-image: url('https://themeim.com/demo/treker/images/background/banner-image-1.jpg');"></div>
+        <div class="auto-container">
+            <div class="content-box">
+                <h2>Trekking</h2>
+                <div class="bread-crumb">
+                    <ul class="clearfix">
+                    <li><span class="icon-home fa fa-home"></span><a asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li class="current">Trekking</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--End Banner Section -->
+
+    <!--Trekking Section-->
+    <section class="trekking-section">
+        <div class="floated-icon left"><img src="~/assets/images/resource/hills-image-2.svg" alt="" title=""></div>
+        <div class="floated-icon right"><img src="~/assets/images/resource/stones-right.svg" alt="" title=""></div>
+        <div class="floated-icon right-2"><img src="~/assets/images/resource/floated-icon-right-2.svg" alt="" title=""></div>
+        <div class="auto-container">
+            <div class="title-box centered">
+                <h2><span>Best Treks for you with Trekker</span></h2>
+                <div class="text">Since 2014, we’ve helped more than 500,000 people of all ages enjoy the best outdoor experience of their lives. Whether it’s for one day or a two-week vacation, close to home or a foreign land.</div>
+            </div>
+            <!--MixitUp Galery-->
+            <div class="mixitup-gallery">
+                <!--Filter-->
+                <div class="gallery-filters centered clearfix">
+                    <ul class="filter-tabs filter-btns clearfix">
+                        <li class="active filter" data-role="button" data-filter="all">All Types</li>
+                        @foreach (var difficulty in Model.Difficulties)
+                    {
+                        
+                        <li class="filter" data-role="button" data-filter=".@difficulty.Name">@difficulty.Name</li>
+                    }
+                        
+                    </ul>
+                </div>
+                <div class="filter-list row clearfix">
+                    <!--Block-->
+                    @foreach (var trekking in Model.Trekkings)
+                {
+                    <div class="trek-block-one style-two mix all @trekking.Difficulty.Name col-xl-4 col-lg-6 col-md-6 col-sm-12">
+                        <div class="inner-box">
+                            <div class="image-box">
+                                <div class="image"><a ><img src="~/assets/images/trekking/@trekking.TrekkingImages?.FirstOrDefault(pi=>pi.IsPrimary == true)?.ImageUrl" alt="" title=""></a></div>
+                                <div class="price"><span>$@trekking.Price</span></div>
+                                <div class="info">
+                                    <span class="i-block"><i class="icon far fa-clock"></i> @trekking.TrekkingDays.Count days</span> &ensp; | &ensp; <span class="i-block">@trekking.Name</span>
+                                </div>
+                            </div>
+                            <div class="lower-content">
+                                <h4><a >@trekking.Name</a></h4>
+                             
+                                <div class="text">@trekking.Title </div>
+                            </div>
+                            <div class="bottom-box clearfix">
+                                <div class="more-link"><a asp-controller="Packages" asp-action="Index" asp-route-Id="@trekking.Id" class="theme-btn"><span>View Details <i class="icon"><img src="~/assets/images/icons/logo-icon.svg" alt=""></i></span></a></div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!--FAQs Section-->
+    <section class="faq-one tracking-page">
+        <div class="floated-icon left"><img src="~/assets/images/resource/stones-left.svg" alt="" title=""></div>
+        <div class="floated-icon right"><img src="~/assets/images/resource/floated-icon-right-2.svg" alt="" title=""></div>
+        <div class="auto-container">
+            <div class="title-box centered">
+                <h2><span>Get Some Important Answer</span></h2>
+            </div>
+            <div class="row clearfix">
+                <!--Text Col-->
+                <div class="text-col col-lg-6 col-md-12 col-sm-12">
+                    <div class="inner wow fadeInLeft" data-wow-duration="1500ms" data-wow-delay="0ms">
+                        <div class="accordion-box clearfix">
+                            <!--Block-->
+                            <div class="accordion block active-block">
+                                <div class="acc-btn active">What is Trekking? <i class="fa-regular fa-angle-down"></i></div>
+                                <div class="acc-content">
+                                    <div class="content">
+                                        <div class="text">One of the major benefits of trekking is that it improves your physical health immensely. Spending multiple hours on the trail, climbing around boulders, rock hopping and ascending hills gives your whole body a workout, improving your strength, agility and cardio fitness.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Block-->
+                            <div class="accordion block">
+                                <div class="acc-btn">What do I need to carry? <i class="fa-regular fa-angle-down"></i></div>
+                                <div class="acc-content">
+                                    <div class="content">
+                                        <div class="text">One of the major benefits of trekking is that it improves your physical health immensely. Spending multiple hours on the trail, climbing around boulders, rock hopping and ascending hills gives your whole body a workout, improving your strength, agility and cardio fitness.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Block-->
+                            <div class="accordion block">
+                                <div class="acc-btn">How concerned should I be about the altitude? <i class="fa-regular fa-angle-down"></i></div>
+                                <div class="acc-content">
+                                    <div class="content">
+                                        <div class="text">One of the major benefits of trekking is that it improves your physical health immensely. Spending multiple hours on the trail, climbing around boulders, rock hopping and ascending hills gives your whole body a workout, improving your strength, agility and cardio fitness.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Block-->
+                            <div class="accordion block">
+                                <div class="acc-btn">What do we eat and drink while on trek? <i class="fa-regular fa-angle-down"></i></div>
+                                <div class="acc-content">
+                                    <div class="content">
+                                        <div class="text">One of the major benefits of trekking is that it improves your physical health immensely. Spending multiple hours on the trail, climbing around boulders, rock hopping and ascending hills gives your whole body a workout, improving your strength, agility and cardio fitness.</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!--Image Col-->
+                <div class="image-col col-lg-6 col-md-12 col-sm-12">
+                    <div class="inner wow fadeInRight" data-wow-duration="1500ms" data-wow-delay="0ms">
+                        <div class="image-box">
+                            <img src="~/assets/images/resource/faq-image-1.svg" alt="" title="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <script src="~/assets/js/jquery.js"></script>
+    <script src="~/assets/js/popper.min.js"></script>
+    <script src="~/assets/js/bootstrap.min.js"></script>
+    <script src="~/assets/js/jquery-ui.js"></script>
+    <script src="~/assets/js/jquery.fancybox.js"></script>
+     <script src="~/assets/js/mixitup.js"></script>
+       <script src="~/assets/js/touchspin.js"></script>
+        <script src="~/assets/js/appear.js"></script>
+         <script src="~/assets/js/odometer.js"></script>
+          <script src="~/assets/js/owl.js"></script>
+           <script src="~/assets/js/wow.js"></script>
+            <script src="~/assets/js/custom-script.js"></script>
+    </section>

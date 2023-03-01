@@ -1,0 +1,99 @@
+﻿@model Country
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Treker - Destinations tours</title>
+<!-- Stylesheets -->
+<link href="~/assets/css/bootstrap.css" rel="stylesheet">
+<link href="~/assets/css/style.css" rel="stylesheet">
+<link rel="shortcut icon" href="~/assets/images/favicon.png" type="image/x-icon">
+<link rel="icon" href="~/assets/images/favicon.png" type="image/x-icon">
+<!-- Responsive -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<link href="~/assets/css/responsive.css" rel="stylesheet">
+<!--[if lt IE 9]><script src="~/assets/https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script><![endif]--> 
+
+</head>
+
+<body>
+  <div class="page-wrapper"> 
+
+    <!-- Banner Section -->
+    <section class="inner-banner">
+            <div class="image-layer" style="background-image: url('https://themeim.com/demo/treker/images/background/banner-image-1.jpg');"></div>
+        <div class="auto-container">
+            <div class="content-box">
+                <h2>Destinations tours</h2>
+                <div class="bread-crumb">
+                    <ul class="clearfix">
+                            <li><span class="icon-home fa fa-home"></span><a asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li class="current">Destinations tours</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--End Banner Section -->
+
+    <!--Destination Tours Section-->
+    <section class="dest-tours">
+        <div class="floated-icon left"><img src="~/assets/images/resource/stones-left.svg" alt="" title=""></div>
+        <div class="floated-icon right"><img src="~/assets/images/resource/stones-right.svg" alt="" title=""></div>
+        <div class="auto-container">
+            <div class="title-box centered">
+                <h2><span>Discover @Model.Name</span></h2>
+                <div class="text">@Model.Description</div>
+            </div>
+            <div class="content-box">
+                <div class="row clearfix">
+                    <!--Block-->
+                    @foreach (var tours in Model.Tours)
+                        {
+                            
+                            <div class="tour-block-one col-xl-4 col-lg-6 col-md-6 col-sm-12">
+                        <div class="inner-box">
+                            <div class="image-box">
+                                <div class="image"><a href="~/assets/#"><img src="~/assets/images/tour/@tours.TourImages?.FirstOrDefault(ti=>ti.IsPrimary == true)?.ImageUrl" alt="" title=""></a></div>
+                            </div>
+                            <div class="lower-content">
+                                <div class="price"><span>$@tours.Price</span></div>
+                                <h4><a asp-controller="Tours" asp-action="Index" asp-route-id="@tours.Id">@tours.Name</a></h4>
+                              
+                                <div class="text">@tours.Title</div>
+                                <div class="bottom-box clearfix">
+                                    <div class="info">
+                                        <span class="i-block"><i class="icon far fa-clock"></i> @tours.TourDays.Count days</span> &ensp; | &ensp; <span class="i-block">@tours.Location</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                        }
+                </div>
+
+            </div>
+        </div>
+    </section>
+</div>
+<!--End pagewrapper--> 
+
+<!--Scroll to top-->
+<div class="scroll-to-top scroll-to-target" data-target="html"><span class="icon"><img src="~/assets/images/icons/arrow-up.svg" alt="" title="Go To Top"></span></div>
+
+<script src="~/assets/js/jquery.js"></script>
+<script src="~/assets/js/popper.min.js"></script>
+<script src="~/assets/js/bootstrap.min.js"></script>
+<script src="~/assets/js/jquery-ui.js"></script>
+<script src="~/assets/js/jquery.fancybox.js"></script>
+<script src="~/assets/js/mixitup.js"></script>
+<script src="~/assets/js/touchspin.js"></script>
+<script src="~/assets/js/owl.js"></script>
+<script src="~/assets/js/appear.js"></script>
+<script src="~/assets/js/odometer.js"></script>
+<script src="~/assets/js/wow.js"></script>
+<script src="~/assets/js/custom-script.js"></script>
+</body>
+</html>

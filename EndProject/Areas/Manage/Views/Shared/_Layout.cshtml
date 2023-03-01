@@ -1,0 +1,705 @@
+﻿@inject EndProject.Areas.Manage.Services.AdminLayoutServices services
+
+@{
+    List<ContactUs> contacts = services.GetContacts();
+    List<Booking> bookings = services.GetBookings();
+    int counter = 0;
+}
+
+
+<!doctype html>
+
+
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <title>Treker - Admin & Dashboard Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description">
+    <meta content="Themesbrand" name="author">
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="~/admin/images/favicon.ico">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+
+    <link href="~/admin/libs/chartist/chartist.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <!-- Bootstrap Css -->
+    <link href="~/admin/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css">
+    <!-- Icons Css -->
+    <link href="~/admin/css/icons.min.css" rel="stylesheet" type="text/css">
+    <!-- App Css-->
+    <link href="~/admin/css/app.min.css" id="app-style" rel="stylesheet" type="text/css">
+
+</head>
+
+<body data-sidebar="dark">
+
+    <!-- Begin page -->
+    <div id="layout-wrapper">
+
+        <header id="page-topbar">
+            <div class="navbar-header">
+                <div class="d-flex">
+                    <!-- LOGO -->
+                    <div class="navbar-brand-box">
+                        <a href="index.html" class="logo logo-dark">
+                            <span class="logo-sm">
+                                <img src="~/admin/images/logo-sm.png" alt="" height="22">
+                            </span>
+                            <span class="logo-lg">
+                                <img src="~/admin/images/logo-dark.png" alt="" height="17">
+                            </span>
+                        </a>
+
+                        <a href="index.html" class="logo logo-light">
+                            <span class="logo-sm">
+                                <img src="~/admin/images/logo-sm.png" alt="" height="22">
+                            </span>
+                            <span class="logo-lg">
+                                <img src="~/admin/images/logo-light.png" alt="" height="18">
+                            </span>
+                        </a>
+                    </div>
+
+                    <button type="button" class="btn btn-sm px-3 font-size-24 header-item waves-effect" id="vertical-menu-btn">
+                        <i class="mdi mdi-menu"></i>
+                    </button>
+
+            
+                </div>
+
+                <div class="d-flex">
+         
+
+                    <div class="dropdown d-inline-block d-lg-none ms-2">
+                        <button type="button" class="btn header-item noti-icon waves-effect" id="page-header-search-dropdown"
+                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="mdi mdi-magnify"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0"
+                             aria-labelledby="page-header-search-dropdown">
+
+                            <form class="p-3">
+                                <div class="form-group m-0">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="Search ..." aria-label="Recipient's username">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="submit"><i class="mdi mdi-magnify"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="dropdown d-none d-lg-inline-block">
+                        <button type="button" class="btn header-item noti-icon waves-effect" data-bs-toggle="fullscreen">
+                            <i class="mdi mdi-fullscreen"></i>
+                        </button>
+                    </div>
+
+                    <div class="dropdown d-inline-block">
+                        <button type="button" class="btn header-item noti-icon waves-effect" id="page-header-notifications-dropdown"
+                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="mdi mdi-bell-outline"></i>
+                            @if (contacts is not null)
+                            {
+                                <span class="badge bg-danger rounded-pill">@contacts.Count()</span>
+                            }
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0" aria-labelledby="page-header-notifications-dropdown">
+                            <div class="p-3">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <h5 class="m-0 font-size-16"> Notifications (@contacts.Count()) </h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-simplebar style="max-height: 460px;">
+
+                                @foreach (var item in contacts)
+                                {
+                                    counter++;
+                                    <a asp-action="Details" asp-controller="ContactAdmin" asp-route-Id="@item.Id" class="text-reset notification-item">
+                                        <div class="d-flex">
+                                            <div class="flex-shrink-0 me-3">
+                                                <div class="avatar-xs">
+                                                    <span class="avatar-title bg-success rounded-circle font-size-16">
+                                                        <i class="bi bi-person"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                <h6 class="mb-1">@item.FullName</h6>
+                                                <div class="font-size-12 text-muted">
+                                                    <p class="mb-1">@item.subject</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    if (counter == 5 )
+                                    {
+                                        break; 
+                                    }
+                                }
+
+
+                            </div>
+                            <div class="p-2 border-top">
+                                <div class="d-grid">
+                                    <a class="btn btn-sm btn-link font-size-14 text-center" href="javascript:void(0)">
+                                        View all
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    
+
+                    <div class="dropdown d-inline-block">
+                        <button type="button" class="btn header-item noti-icon waves-effect" id="page-header-notifications-dropdown"
+                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="bi bi-app-indicator"></i>
+                            
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0" aria-labelledby="page-header-notifications-dropdown">
+                            <div class="p-3">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <h5 class="m-0 font-size-16"> Notifications (@bookings.Count()) </h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-simplebar style="max-height: 460px;">
+
+                                @foreach (var item in bookings)
+                                {
+                                    counter++;
+                                    <a asp-action="Details" asp-controller="Booking" asp-route-Id="@item.Id" class="text-reset notification-item">
+                                        <div class="d-flex">
+                                            <div class="flex-shrink-0 me-3">
+                                                <div class="avatar-xs">
+                                                    <span class="avatar-title bg-success rounded-circle font-size-16">
+                                                        <i class="bi bi-person"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                <h6 class="mb-1">@item.FullName</h6>
+                                                <div class="font-size-12 text-muted">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    if (counter == 5)
+                                    {
+                                        break;
+                                    }
+                                }
+
+
+                            </div>
+                            <div class="p-2 border-top">
+                                <div class="d-grid">
+                                    <a class="btn btn-sm btn-link font-size-14 text-center" href="javascript:void(0)">
+                                        View all
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                   @* <div class="dropdown d-inline-block">
+                        <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
+                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img class="rounded-circle header-profile-user" src="https://img.freepik.com/free-icon/user_318-804790.jpg"
+                                 alt="Header Avatar">
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-end">
+                            <!-- item-->
+                            <a class="dropdown-item" href="#"><i class="mdi mdi-account-circle font-size-17 align-middle me-1"></i> Profile</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item text-danger" href="#"><i class="bx bx-power-off font-size-17 align-middle me-1 text-danger"></i> Logout</a>
+                        </div>
+                    </div>*@
+
+                </div>
+            </div>
+        </header>
+        <div class="vertical-menu">
+
+            <div data-simplebar class="h-100">
+
+                <!--- Sidemenu -->
+                <div id="sidebar-menu">
+                    <!-- Left Menu Start -->
+                    <ul class="metismenu list-unstyled" id="side-menu">
+               
+                        <li>
+                            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                <i class="bi bi-yelp"></i>
+                                <span>Comment</span>
+                            </a>
+                                <ul class="sub-menu" aria-expanded="false">
+                                    <li><a asp-area="Manage" asp-controller="Comment" asp-action="Index">List</a></li>
+                                    <li><a asp-area="Manage" asp-controller="Comment" asp-action="Create">Create</a></li>
+                                </ul>
+                        </li>
+                        <li>
+                            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                <i class="bi bi-images"></i>
+                                <span>Gallery</span>
+                            </a>
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li>
+                                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                        <span>Gallery Category</span>
+                                    </a>
+                                    <ul class="sub-menu" aria-expanded="false">
+                                        <li><a asp-area="Manage" asp-controller="GalleryCategory" asp-action="Index">List</a></li>
+                                        <li><a asp-area="Manage" asp-controller="GalleryCategory" asp-action="Create">Create</a></li>
+                                    </ul>
+                                </li>
+                             
+                                <li>
+                                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                        <span>Gallery</span>
+                                    </a>
+                                    <ul class="sub-menu" aria-expanded="false">
+                                        <li><a asp-area="Manage" asp-controller="Image" asp-action="Index">List</a></li>
+                                        <li><a asp-area="Manage" asp-controller="Image" asp-action="Create">Create</a></li>
+                                    </ul>
+                                </li>
+                              
+                            </ul>
+                        </li>
+                        <!--Setting-->
+                        <li>
+                                <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                <i class="bi bi-gear"></i>
+                                    <span>Setting</span>
+                                </a>
+                                <ul class="sub-menu" aria-expanded="false">
+                                <li>
+                                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                        <span>Entry</span>
+                                    </a>
+                                    <ul class="sub-menu" aria-expanded="false">
+                                        <li><a asp-area="Manage" asp-controller="Entry" asp-action="Index">List</a></li>
+                                        <li><a asp-area="Manage" asp-controller="Entry" asp-action="Create">Create</a></li>
+                                    </ul>
+                                </li>
+                                  <li>
+                                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                        <span>Information</span>
+                                    </a>
+                                    <ul class="sub-menu" aria-expanded="false">
+                                        <li><a asp-area="Manage" asp-controller="Information" asp-action="Index">List</a></li>
+                                        <li><a asp-area="Manage" asp-controller="Information" asp-action="Create">Create</a></li>
+                                    </ul>
+                                </li>
+                                  <li>
+                                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                        <span>Question Category</span>
+                                    </a>
+                                    <ul class="sub-menu" aria-expanded="false">
+                                        <li><a asp-area="Manage" asp-controller="QuestionCategory" asp-action="Index">List</a></li>
+                                        <li><a asp-area="Manage" asp-controller="QuestionCategory" asp-action="Create">Create</a></li>
+                                    </ul>
+                                </li>
+                                   <li>
+                                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                        <span>Question</span>
+                                    </a>
+                                    <ul class="sub-menu" aria-expanded="false">
+                                        <li><a asp-area="Manage" asp-controller="Question" asp-action="Index">List</a></li>
+                                        <li><a asp-area="Manage" asp-controller="Question" asp-action="Create">Create</a></li>
+                                    </ul>
+                                </li>
+                                  <li>
+                                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                        <span>Gallery</span>
+                                    </a>
+                                    <ul class="sub-menu" aria-expanded="false">
+                                        <li><a asp-area="Manage" asp-controller="Image" asp-action="Index">List</a></li>
+                                        <li><a asp-area="Manage" asp-controller="Image" asp-action="Create">Create</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+
+                                        <span>Choose</span>
+                                    </a>
+                                    <ul class="sub-menu" aria-expanded="false">
+                                        <li><a asp-area="Manage" asp-controller="Choose" asp-action="Index">List</a></li>
+                                        <li><a asp-area="Manage" asp-controller="Choose" asp-action="Create">Create</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                        <span>Continent Info</span>
+                                    </a>
+                                    <ul class="sub-menu" aria-expanded="false">
+                                        <li><a asp-area="Manage" asp-controller="ContinentInfo" asp-action="Index">List</a></li>
+                                        <li><a asp-area="Manage" asp-controller="ContinentInfo" asp-action="Create">Create</a></li>
+                                    </ul>
+                                </li>
+
+                                <li>
+                                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                        <span>Condition</span>
+                                    </a>
+                                    <ul class="sub-menu" aria-expanded="false">
+                                        <li><a asp-area="Manage" asp-controller="Condition" asp-action="Index">List</a></li>
+                                        <li><a asp-area="Manage" asp-controller="Condition" asp-action="Create">Create</a></li>
+                                    </ul>
+                                </li>
+
+                                <li>
+                                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                        <span>Office Map</span>
+                                    </a>
+                                    <ul class="sub-menu" aria-expanded="false">
+                                        <li><a asp-area="Manage" asp-controller="OfficeMap" asp-action="Index">List</a></li>
+                                        <li><a asp-area="Manage" asp-controller="OfficeMap" asp-action="Create">Create</a></li>
+                                    </ul>
+                                </li>
+
+
+
+                                <li>
+                                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                        <span>Most Answer</span>
+                                    </a>
+                                    <ul class="sub-menu" aria-expanded="false">
+                                        <li><a asp-area="Manage" asp-controller="MostAnswer" asp-action="Index">List</a></li>
+                                        <li><a asp-area="Manage" asp-controller="MostAnswer" asp-action="Create">Create</a></li>
+                                    </ul>
+                                </li>
+
+                                    <li>
+                            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                <span>Agency</span>
+                            </a>
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li><a asp-area="Manage" asp-controller="Agency" asp-action="Index">List</a></li>
+                                <li><a asp-area="Manage" asp-controller="Agency" asp-action="Create">Create</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                <span>Footer & Header</span>
+                            </a>
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li><a asp-area="Manage" asp-controller="Setting" asp-action="Index">List</a></li>
+                            </ul>
+                        </li>
+                                <li>
+                                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                        <span>Most  Frequent</span>
+                                    </a>
+                                    <ul class="sub-menu" aria-expanded="false">
+                                        <li><a asp-area="Manage" asp-controller="MostFrequent" asp-action="Index">List</a></li>
+                                        <li><a asp-area="Manage" asp-controller="MostFrequent" asp-action="Create">Create</a></li>
+                                    </ul>
+                                </li>
+                                </ul>
+                            </li>
+                            <!--Tour-->
+                              <li>
+                            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                <i class="fa-solid fa-person-walking-luggage"></i>
+                                <span>Tour</span>
+                            </a>
+                            <ul class="sub-menu" aria-expanded="false">
+                               
+                              <li>
+                            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                <span>Tour Category</span>
+                            </a>
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li><a asp-area="Manage" asp-controller="TourCategory" asp-action="Index">List</a></li>
+                                <li><a asp-area="Manage" asp-controller="TourCategory" asp-action="Create">Create</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                <span>Tour Continent</span>
+                            </a>
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li><a asp-area="Manage" asp-controller="Continent" asp-action="Index">List</a></li>
+                                <li><a asp-area="Manage" asp-controller="Continent" asp-action="Create">Create</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                <span>Tour Country</span>
+                            </a>
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li><a asp-area="Manage" asp-controller="TourCountry" asp-action="Index">List</a></li>
+                                <li><a asp-area="Manage" asp-controller="TourCountry" asp-action="Create">Create</a></li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                <span>Tour Facilitie</span>
+                            </a>
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li><a asp-area="Manage" asp-controller="TFacilitie" asp-action="Index">List</a></li>
+                                <li><a asp-area="Manage" asp-controller="TFacilitie" asp-action="Create">Create</a></li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                <span>Tour Feature</span>
+                            </a>
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li><a asp-area="Manage" asp-controller="TFeature" asp-action="Index">List</a></li>
+                                <li><a asp-area="Manage" asp-controller="TFeature" asp-action="Create">Create</a></li>
+                            </ul>
+                        </li>
+
+
+                        <li>
+                            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                <span>Room</span>
+                            </a>
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li><a asp-area="Manage" asp-controller="Room" asp-action="Index">List</a></li>
+                                <li><a asp-area="Manage" asp-controller="Room" asp-action="Create">Create</a></li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                <span>Hotel</span>
+                            </a>
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li><a asp-area="Manage" asp-controller="Hotel" asp-action="Index">List</a></li>
+                                <li><a asp-area="Manage" asp-controller="Hotel" asp-action="Create">Create</a></li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                <span>Tour</span>
+                            </a>
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li><a asp-area="Manage" asp-controller="Tour" asp-action="Index">List</a></li>
+                                <li><a asp-area="Manage" asp-controller="Tour" asp-action="Create">Create</a></li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                <span>Tour Day</span>
+                            </a>
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li><a asp-area="Manage" asp-controller="TourDay" asp-action="Index">List</a></li>
+                                <li><a asp-area="Manage" asp-controller="TourDay" asp-action="Create">Create</a></li>
+                            </ul>
+                        </li>
+                              
+                            </ul>
+                        </li>
+                        <!--Trekking-->
+                          <li>
+                            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                <i class="fa-regular fa-cart-flatbed-suitcase"></i>
+                                <span>Trekking</span>
+                            </a>
+                            <ul class="sub-menu" aria-expanded="false">
+                           
+                                 <li>
+                            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                <span>Trekking Difficulty</span>
+                            </a>
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li><a asp-area="Manage" asp-controller="Difficulty" asp-action="Index">List</a></li>
+                                <li><a asp-area="Manage" asp-controller="Difficulty" asp-action="Create">Create</a></li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                <span>Trekking Facilitie</span>
+                            </a>
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li><a asp-area="Manage" asp-controller="TrFacilitie" asp-action="Index">List</a></li>
+                                <li><a asp-area="Manage" asp-controller="TrFacilitie" asp-action="Create">Create</a></li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                <span>Trekking Feature</span>
+                            </a>
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li><a asp-area="Manage" asp-controller="TrFeature" asp-action="Index">List</a></li>
+                                <li><a asp-area="Manage" asp-controller="TrFeature" asp-action="Create">Create</a></li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                <span>Trekking Day</span>
+                            </a>
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li><a asp-area="Manage" asp-controller="TrekkingDay" asp-action="Index">List</a></li>
+                                <li><a asp-area="Manage" asp-controller="TrekkingDay" asp-action="Create">Create</a></li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                <span>Trekking</span>
+                            </a>
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li><a asp-area="Manage" asp-controller="Trekking" asp-action="Index">List</a></li>
+                                <li><a asp-area="Manage" asp-controller="Trekking" asp-action="Create">Create</a></li>
+                            </ul>
+                        </li>
+                       
+                              
+                            </ul>
+                        </li>
+                            <!--Product-->
+                       <li>
+                                <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                <i class="bi bi-bag-heart-fill"></i>
+                                <span>Product</span>
+                                </a>
+                                <ul class="sub-menu" aria-expanded="false">
+                                 <li>
+                            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                <span>Category</span>
+                            </a>
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li><a asp-area="Manage" asp-controller="Category" asp-action="Index">List</a></li>
+                                <li><a asp-area="Manage" asp-controller="Category" asp-action="Create">Create</a></li>
+                            </ul>
+                        </li>
+                                <li>
+                                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                        <span>Tag</span>
+                                    </a>
+                                    <ul class="sub-menu" aria-expanded="false">
+                                        <li><a asp-area="Manage" asp-controller="Tag" asp-action="Index">List</a></li>
+                                        <li><a asp-area="Manage" asp-controller="Tag" asp-action="Create">Create</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                        <span>Color</span>
+                                    </a>
+                                    <ul class="sub-menu" aria-expanded="false">
+                                        <li><a asp-area="Manage" asp-controller="Color" asp-action="Index">List</a></li>
+                                        <li><a asp-area="Manage" asp-controller="Color" asp-action="Create">Create</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                        <span>Feature</span>
+                                    </a>
+                                    <ul class="sub-menu" aria-expanded="false">
+                                        <li><a asp-area="Manage" asp-controller="PFeature" asp-action="Index">List</a></li>
+                                        <li><a asp-area="Manage" asp-controller="PFeature" asp-action="Create">Create</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                        <span>Product</span>
+                                    </a>
+                                    <ul class="sub-menu" aria-expanded="false">
+                                        <li><a asp-area="Manage" asp-controller="Product" asp-action="Index">List</a></li>
+                                        <li><a asp-area="Manage" asp-controller="Product" asp-action="Create">Create</a></li>
+                                    </ul>
+                                </li>
+                        
+                                </ul>
+                            </li>
+                            
+                            <!--Employee-->
+                        <li>
+                            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                <i class="bi bi-person-bounding-box"></i>
+                                <span>Position</span>
+                            </a>
+                            <ul class="sub-menu" aria-expanded="false">
+
+
+                                <li>
+                                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                        <span>Employee</span>
+                                    </a>
+                                    <ul class="sub-menu" aria-expanded="false">
+                                        <li><a asp-area="Manage" asp-controller="Employee" asp-action="Index">List</a></li>
+                                        <li><a asp-area="Manage" asp-controller="Employee" asp-action="Create">Create</a></li>
+                                    </ul>
+                                </li>
+
+                                <li>
+                                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                        <span>Position</span>
+                                    </a>
+                                    <ul class="sub-menu" aria-expanded="false">
+                                        <li><a asp-area="Manage" asp-controller="Position" asp-action="Index">List</a></li>
+                                        <li><a asp-area="Manage" asp-controller="Position" asp-action="Create">Create</a></li>
+                                    </ul>
+                                </li>
+
+                            </ul>
+                        </li>
+
+
+                        <li>
+                            <a href="javascript: void(0);" class="has-arrow waves-effect">
+
+                                <i class="bi bi-amd"></i> <span>Brand</span>
+                            </a>
+                            <ul class="sub-menu" aria-expanded="false">
+                                <li><a asp-area="Manage" asp-controller="Brand" asp-action="Index">List</a></li>
+                                <li><a asp-area="Manage" asp-controller="Brand" asp-action="Create">Create</a></li>
+                            </ul>
+                        </li>
+
+
+                    </ul>
+                </div>
+                <!-- Sidebar -->
+            </div>
+        </div>
+        <div class="main-content">
+            <div class="page-content">
+                @RenderBody()
+            </div>
+        </div>
+        <!-- JAVASCRIPT -->
+        <script src="~/admin/libs/jquery/jquery.min.js"></script>
+        <script src="~/admin/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="~/admin/libs/metismenu/metisMenu.min.js"></script>
+        <script src="~/admin/libs/simplebar/simplebar.min.js"></script>
+        <script src="~/admin/libs/node-waves/waves.min.js"></script>
+
+
+        <!-- Peity chart-->
+        <script src="~/admin/libs/peity/jquery.peity.min.js"></script>
+
+        <!-- Plugin Js-->
+        <script src="~/admin/libs/chartist/chartist.min.js"></script>
+        <script src="~/admin/libs/chartist-plugin-tooltips/chartist-plugin-tooltip.min.js"></script>
+        <script src="https://kit.fontawesome.com/78284c83fc.js" crossorigin="anonymous"></script>
+        <script src="~/admin/js/pages/dashboard.init.js"></script>
+
+        <script src="~/admin/js/app.js"></script>
+</body>
+</html>

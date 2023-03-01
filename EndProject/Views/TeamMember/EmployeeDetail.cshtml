@@ -1,0 +1,93 @@
+﻿
+@{
+    ViewData["Title"] = "EmployeeDetail";
+}
+
+@model HomeVM
+
+<!-- Banner Section -->
+<section class="inner-banner">
+    <div class="image-layer" style="background-image: url('https://themeim.com/demo/treker/images/background/banner-image-1.jpg');"></div>
+    <div class="auto-container">
+        <div class="content-box">
+            <h2>Tam Single</h2>
+            <div class="bread-crumb">
+                <ul class="clearfix">
+                    <li><span class="icon-home fa fa-home"></span><a asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li class="current">Team Single</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<!--End Banner Section -->
+<!--Team Member-->
+<section class="team-single">
+
+    <div class="floated-icon left"><img src="~/assets/images/resource/dotted-pattern-1.png" alt="" title=""></div>
+    <div class="floated-icon right"><img src="~/assets/images/resource/stones-right.svg" alt="" title=""></div>
+    <div class="auto-container">
+        <div class="content-box">
+
+
+            <div class="row clearfix">
+                <!--Image Col-->
+                <div class="image-col col-lg-6 col-md-6 col-sm-12">
+                    <div class="inner">
+                        <div class="image">
+                            <div class="image"><img src="~/assets/images/@Model.Employee.ImageUrl" alt="" title=""></div>
+                        </div>
+                    </div>
+                </div>
+                <!--Content Col-->
+                <div class="content-col col-lg-6 col-md-6 col-sm-12">
+                    <div class="inner">
+                        <div class="member-info">
+                            <h4 class="name">@(Model.Employee.Name+" "+Model.Employee.Surname)</h4>
+                            <div class="designation">@Model.Employee.Position?.Name</div>
+                        </div>
+                        <div class="member-about">
+                            <h6>About Me :</h6>
+                            <div class="text">@Model.Employee.Description</div>
+                        </div>
+                        <div class="member-contact">
+                            <div class="phone"><span class="icon"><img src="~/assets/images/icons/phone-1.svg" alt="" title=""></span> Phone: <a href="~/assets/tel:+123456789">@Model.Employee.PhoneNumber</a></div>
+                            <div class="phone"><span class="icon"><img src="~/assets/images/icons/email-1.svg" alt="" title=""></span> Email: <a href="~/assets/mailto:example@treker.com">@Model.Employee.Mail</a></div>
+                        </div>
+                        <div class="member-quote">
+                            <div class="icon"><img src="~/assets/images/icons/quotes-4.svg" alt="" title=""></div>
+                            <div class="quote">@Model.Employee.About</div>
+                        </div>
+                        <div class="social-links">
+                            <ul class="clearfix">
+                                @if (Model.Employee.FacebookLink!=null)
+                                {
+                                    
+                                <li><a href="@Model.Employee.FacebookLink"><i class="fab fa-facebook-f"></i></a></li>
+                                }
+                                @if (Model.Employee.TwitterLink != null)
+                                {
+                                    
+                                <li><a href="@Model.Employee.TwitterLink"><i class="fab fa-twitter"></i></a></li>
+                                    
+                                }
+                                @if (Model.Employee.YoutubeLink != null)
+                                {
+                                <li><a href="@Model.Employee.YoutubeLink"><i class="fab fa-youtube"></i></a></li>
+                                    
+                                }
+                                @if (Model.Employee.InstagramLink != null)
+                                {
+                                <li><a href="@Model.Employee.InstagramLink"><i class="fab fa-instagram"></i></a></li>
+                                    
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</section>

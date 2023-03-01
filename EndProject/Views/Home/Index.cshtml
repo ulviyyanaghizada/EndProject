@@ -1,0 +1,308 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model HomeVM
+    <!-- Banner Section -->
+    <section class="banner-two">
+
+        <div class="banner-container">
+            <div class="banner-slider-box">
+                <!--Slide Item-->
+                <div class="slide-item">
+                    <div class="floated-icon left"><img src="~/assets/images/main-slider/banner-stones-left.svg" alt="" title=""></div>
+                    <div class="floated-icon right"><img src="~/assets/images/main-slider/banner-stones-right.svg" alt="" title=""></div>
+                    <div class="bg-image-1"><img src="~/assets/images/main-slider/banner-image-4.svg" alt="" title=""></div>
+                    <div class="auto-container">
+                      <div class="content-box">
+                            <div class="bg-image-2"><img src="~/assets/images/main-slider/banner-image-3.svg" alt="" title=""></div>
+                            <div class="content">
+                                <div class="clearfix">
+                                    <div class="inner">
+                                        @foreach (var item in Model.Entries)
+                                    {
+                                        <h2>@item.Title</h2>
+                                        <h1><span>@item.Name</span></h1>
+                                        <div class="text">@item.Description</div>
+                                    }
+                                        
+                                        <div class="links-box clearfix">
+                                            <div class="link"><a asp-controller="Destinations" asp-action="Index" class="theme-btn btn-style-two"><span>View All Tours<i class="icon"><img src="~/assets/images/icons/logo-icon.svg" alt="" title=""></i></span></a></div>
+                                            <div class="link"><a asp-controller="TermsAndConditions" asp-action="Index" class="theme-btn btn-style-one"><span>Read More<i class="icon far fa-angle-right"></i></span></a></div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="banner-image">
+                                <div class="image"><img src="~/assets/images/main-slider/banner-image-2.svg" alt="" title=""></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!--End Banner Section -->
+
+    <!--Why Section-->
+    <section class="why-two">
+        <div class="auto-container">
+
+            <div class="title-box centered">
+                <div class="subtitle">We Are Awesome</div>
+                <h2><i class="bg-vector"></i><span>Why Choose Treker</span></h2>
+            </div>
+
+            <div class="content-box">
+                <div class="row clearfix">
+                    @foreach (var item in Model.Chooses)
+                {
+                     <div class="why-block-two col-xl-4 col-lg-4 col-md-6 col-sm-12">
+                        <div class="inner-box">
+                            <div class="icon-box"><img src="~/assets/images/resource/@item.ImageUrl" alt=""></div>
+                            <h4>@item.Title</h4>
+                            <div class="text">@item.Description</div>
+                        </div>
+                    </div>
+                }
+                 
+                    
+                   
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--About Us Section-->
+    <section class="about-two">
+        <div class="bg-layer" style="background-image: url(~/assets/images/background/pattern-1.png);"></div>
+        <div class="floated-icon left"><img src="~/assets/images/resource/about-stone-two.svg" alt="" title=""></div>
+        <div class="auto-container">
+            <div class="row clearfix">
+                <!--Text Col-->
+                @foreach (var item in Model.Agencies)
+            {
+                <div class="text-col col-lg-6 col-md-12 col-sm-12">
+                    <div class="inner wow fadeInLeft" data-wow-duration="1500ms" data-wow-delay="0ms">
+                        <div class="title-box">
+                            <div class="subtitle">About Treker</div>
+                            <h2><i class="bg-vector"></i><span>World Best Travel Agency</span></h2>
+                            <div class="text">@item.Description</div>
+                        </div>
+                        <div class="lower-box">
+                            <div class="lower-inner clearfix">
+                                <div class="text-content">
+                                    <ul>
+                                        <li>@item.FirstTitle</li>
+                                        <li>@item.SecondTitle</li>
+                                        <li>@item.ThirdTitle</li>
+                                    </ul>
+                                </div>
+                                <div class="image-box">
+                                    <img src="~/assets/images/@item.ImageUrl" alt="" title="">
+                                <a href="~/assets/@item.Video" class="theme-btn lightbox-image overlink"><span class="icon fa fa-play"></span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+                
+                <!--Image Col-->
+                @foreach (var item in Model.Agencies)
+            {
+                
+                <div class="image-col col-lg-6 col-md-12 col-sm-12">
+                    <div class="inner wow fadeInRight" data-wow-duration="1500ms" data-wow-delay="0ms">
+                        <div class="image">
+                            <img src="~/assets/images/@item.ImageCoverUrl" alt="" title="">
+                        </div>
+                    </div>
+                </div>
+            }
+            </div>
+        </div>
+    </section>
+
+    <!--Trending Destinations Section-->
+    <section class="trending-two">
+        <div class="auto-container">
+
+            <div class="title-box">
+                <div class="subtitle">Top Destinations</div>
+                <h2><i class="bg-vector"></i><span>Trending Destinations</span></h2>
+            </div>
+
+            <div class="carousel-box">
+                <div class="trending-carousel owl-theme owl-carousel">
+                    <!--Block-->
+                @foreach (var country in Model.Countires)
+                {
+                    
+                    <div class="dest-block-two">
+                        <div class="inner-box">
+                            <div class="image-box"><a href="~/assets/#"><img style="width:550px;height:400px" src="~/assets/images/country/@country.ImageUrl" alt=""></a></div>
+                            <div class="hvr-box">
+                                <div class="cap-box">
+                                    <div class="cap-inner clearfix">
+                                        <h4><a asp-controller="Destinations2" asp-action="Index" asp-route-id="@country.Id">@country.Name</a></h4>
+                                        <div class="tour-count"><span>@country.Tours.Count Tours</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--Products Section-->
+    <section class="products-section">
+        <div class="floated-icon left"><img src="~/assets/images/resource/stones-left.svg" alt="" title=""></div>
+        <div class="floated-icon right"><img src="~/assets/images/resource/stones-right.svg" alt="" title=""></div>
+        <div class="auto-container">
+
+            <div class="title-box centered">
+                <div class="subtitle">Shop Now</div>
+                <h2><i class="bg-vector"></i><span>Featured Trekking Products</span></h2>
+            </div>
+
+            <div class="row clearfix">
+                <!--Block-->
+                @foreach (var item in Model.Products)
+            {
+                
+               <div class="prod-block col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                    <div class="inner-box">
+                        <div class="why-block">
+                            <div class="image-box">
+                                <div class="image"><a href="~/assets/#"><img src="~/assets/images/product/@item.ProductImages?.FirstOrDefault(pi=>pi.IsPrimary == true)?.ImageUrl" alt=""></a></div>
+                                <div class="hvr-box">
+                                    <div class="hvr-inner">
+                                        <div class="hvr-content">
+                                            <div class="link"><a asp-controller="Home" asp-action="AddBasket" asp-route-Id="@item.Id" class="theme-btn"><i class="far fa-shopping-cart"></i> Add To Basket</a></div>
+                                            <div class="link"><a asp-controller="ProductDetails" asp-action="ProductDetail" asp-route-id="@item.Id"  class="theme-btn"><i class="far fa-bars"></i> Details</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="add-fav"><a asp-controller="Home" asp-action="WishList" asp-route-Id="@item.Id" class="theme-btn"><i class="far fa-heart"></i></a></div>
+                            </div>
+                            <div class="lower-box">
+                                <h5><a href="~/assets/#">@item.Title</a></h5>
+                                <div class="price"><span>$ @item.CostPrice</span></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            }
+
+
+            </div>
+
+            <div class="see-more-link"><a asp-controller="OurShop" asp-action="Index" class="theme-btn btn-style-one"><span>View All Products <i class="icon"><img src="~/assets/images/icons/logo-icon.svg" alt="" title=""></i></span></a></div>
+        </div>
+    </section>
+
+    <!--Popular Section-->
+    <section class="popular-section style-two">
+    <div class="bg-layer" style="background-image: url('https://themeim.com/demo/treker/images/background/image-4.jpg');"></div>
+        <div class="auto-container">
+            <div class="title-box centered">
+                <div class="subtitle">Modern & Beautiful</div>
+                <h2><i class="bg-vector"></i><span>Our Most Popular Trekking</span></h2>
+            </div>
+            <div class="carousel-box">
+                <div class="popular-carousel owl-theme owl-carousel">
+                    <!--Block-->
+                    @foreach (var item in Model.Trekkings)
+                {
+                    
+                    <div class="trek-block-one">
+                        <div class="inner-box">
+                            <div class="image-box">
+                                <div class="image"><a><img src="~/assets/images/trekking/@item.TrekkingImages?.FirstOrDefault(pi=>pi.IsPrimary == true)?.ImageUrl" alt="" title=""></a></div>
+                                <div class="price"><span>$@item.Price</span></div>
+                                <div class="info">
+                                    <span class="i-block"><i class="icon far fa-clock"></i> @item.TrekkingDays.Count days</span> &ensp; | &ensp; <span class="i-block">@item.Location</span>
+                                </div>
+                            </div>
+                            <div class="lower-content">
+                                <h4><a>@item.Name</a></h4>
+
+                                <div class="text">@item.Title </div>
+                            </div>
+                            <div class="bottom-box clearfix">
+                                <div class="more-link"><a asp-controller="Packages" asp-action="Index" asp-route-Id="@item.Id" class="theme-btn"><span>View Details <i class="icon"><img src="~/assets/images/icons/logo-icon.svg" alt=""></i></span></a></div>
+
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+   <!--Testimonials Section-->
+    <section class="testimonials-one">
+    <div class="bg-layer" style="background-image: url(~/assets/images/background/image-3.jpg);"></div>
+        <div class="auto-container">
+            <div class="title-box centered">
+                <div class="subtitle">Review & Testimonial</div>
+                <h2><i class="bg-vector"></i><span>Top Reviews for Treker</span></h2>
+            </div>
+            <div class="carousel-box">
+                <div class="testi-carousel owl-theme owl-carousel">
+                    <!--Testi Block-->
+                    @foreach (var item in Model.Comments)
+                {
+                    
+                    <div class="testi-block">
+                        <div class="inner-box">
+                        <div class="icon"><img src="~/assets/images/icons/quotes-1.svg" alt=""></div>
+                            <div class="image"><img src="~/assets/images/@item.Employee.ImageUrl" alt=""></div>
+                            <div class="text">@item.Description</div>
+                            <div class="info">
+                                <div class="name">@item.Employee.Name @item.Employee.Surname</div>
+                                <div class="clearfix">
+                                    <div class="designation">@item.Employee.Position.Name</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--Sponsors Section-->
+    <section class="sponsors-one style-two">
+        <div class="bg-layer" style="background-image: url(images/background/image-5.png);"></div>
+        <div class="auto-container">
+            <div class="carousel-box">
+                <div class="sponsors-carousel owl-theme owl-carousel">
+                    <!--Block-->
+                   @foreach (var item in Model.Brands)
+                {
+                     <div class="sponsor-block">
+                        <div class="inner-box">
+                            <div class="image"><a href="~/assets/#"><img src="~/assets/images/brand/@item.ImageUrl" alt=""></a></div>
+                        </div>
+                    </div>
+                }
+
+                </div>
+            </div>
+        </div>
+    </section>
+

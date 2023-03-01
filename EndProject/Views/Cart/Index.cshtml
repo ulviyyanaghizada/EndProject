@@ -1,0 +1,112 @@
+﻿@using EndProject.Models.ViewModels.Basket;
+@model BasketVM
+@using Microsoft.Extensions.Options
+@inject IOptions<EndProject.Data.StripeSettings> Stripe
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<!-- Banner Section -->
+<section class="inner-banner">
+    <div class="image-layer" style="background-image: url('https://themeim.com/demo/treker/images/background/banner-image-1.jpg');"></div>
+    <div class="auto-container">
+        <div class="content-box">
+            <h2>Add to cart</h2>
+            <div class="bread-crumb">
+                <ul class="clearfix">
+                    <li><span class="icon-home fa fa-home"></span><a asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li class="current">Add to cart</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<!--End Banner Section -->
+<!--Cart Section-->
+<section class="cart-section">
+    <div class="auto-container">
+        <!--Cart Outer-->
+        <div class="cart-outer">
+            <div class="table-outer">
+                <div class="table-box">
+                    <table class="cart-table">
+                        <thead class="cart-header">
+                            <tr>
+                                <th>&nbsp;</th>
+                                <th class="prod-column">Product</th>
+                                <th class="price">Price</th>
+                                <th>Quantity</th>
+                                <th>SubTotal</th>
+                                <th>&nbsp;</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach (var item in (Model.Dress ?? new List<ProductBasketItemVM>()))
+                            {
+                                
+                            <tr>
+                                <td colspan="2" class="prod-column">
+                                    <div class="column-box">
+                                            <figure class="prod-thumb"><a href="~/assets/#"><img src="~/assets/images/product/@item.Product.ProductImages?.FirstOrDefault(pi=>pi.IsPrimary == true)?.ImageUrl" alt=""></a></figure>
+                                            <h4 class="prod-title">@item.Product.Title</h4>
+                                    </div>
+                                </td>
+                                <td class="price">$@item.Product.SellPrice</td>
+                                <td class="qty">
+                                    <div class="quantity-box">
+                                        
+                                    </div>
+                                </td>
+                                    <td class="sub-total">$@item.Count x $@item.Product.SellPrice</td>
+                                <td class="remove"><a href="~/assets/#" class="remove-btn"><span class="far fa-times"></span></a></td>
+                            </tr>
+                            }
+                         
+                        </tbody>
+                    </table>
+                </div>
+               
+
+            </div>
+
+            <div class="totals-column clearfix">
+                <div class="inner">
+                    <div class="cart-total">
+                        <h3 class="title">Cart Totals</h3>
+                        <!--Totals Table-->
+                        <ul class="totals-table">
+                            <li class="clearfix">
+                                <span class="col col-title">Subtotal</span>
+                                <span class="col">$@Model.TotalPrice</span>
+                            </li>
+                          
+
+                     <div class="agreement">
+                    <input type="checkbox" name="agree" id="agree">
+                    <label for="agree">I agree with this <a href="~/assets/terms-conditions.html">teams and condition</a> *</label>
+                </div>
+                <div class="text-center">
+                    <div>
+                        <form asp-action="Charge" asp-controller="Home" method="POST">
+                       
+                 <script src="https://checkout.stripe.com/v2/checkout.js"
+                    class="stripe-button"
+                    data-Image="https://stripe.com/img/documentation/marketplace.png"
+                    data-key="pk_test_51MX366JM0qRwmkxc8fqkNMcYu66nakwRyV4GxjIritiyMxTtyYR88FKme4aPAbvk55RhDmWrDHYZcg1mtkB3cCh000qj8IeGwj"
+                    data-locale="auto"
+                    data-description="Sample Charge">
+            </script>
+        </form>
+    </div>
+</div>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Cart Section-->

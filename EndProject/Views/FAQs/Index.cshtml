@@ -1,0 +1,202 @@
+﻿@using EndProject.Models;
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model HomeVM
+
+
+
+
+<!-- Banner Section -->
+<section class="inner-banner">
+    <div class="image-layer" style="background-image: url('https://themeim.com/demo/treker/images/background/banner-image-1.jpg');"></div>
+    <div class="auto-container">
+        <div class="content-box">
+            <h2>FAQ</h2>
+            <div class="bread-crumb">
+                <ul class="clearfix">
+                    <li><span class="icon-home fa fa-home"></span><a asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li class="current">FAQ</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<!--End Banner Section -->
+<!--FAQs Section-->
+<section class="faq-two">
+    <div class="floated-icon left"><img src="~/assets/images/resource/stones-left.svg" alt="" title=""></div>
+    <div class="floated-icon right"><img src="~/assets/images/resource/stones-right.svg" alt="" title=""></div>
+    <div class="auto-container">
+        <div class="title-box centered">
+            <h2><span>Frequently asked question</span></h2>
+            <div class="text">Since 2014, we’ve helped more than 500,000 people of all ages enjoy the best outdoor experience of their lives. Whether it’s for one day or a two-week vacation, close to home or a foreign land.</div>
+        </div>
+        <div class="tabs-box">
+            <ul class="tab-buttons clearfix">
+                <li class="tab-btn active-btn" data-tab="#tab-0"><span>All</span></li>
+                @foreach (QuestionCategory category in Model.QuestionCategories)
+                {
+                    <li class="tab-btn" data-tab="#tab-@category.Id"><span>@category.Name</span></li>
+                }
+            </ul>
+            <div class="tabs-content">
+                <!--Tab-->
+                <div class="tab active-tab" id="tab-0">
+                    <div class="tab-inner">
+                        <div class="row clearfix">
+                                @for (int i = 0; i < (Model.Questions.Count() / 2) ; i++)
+                                {
+                                <div class="text-col col-lg-6 col-md-12 col-sm-12">
+                                <div class="faq-block">
+                                    <div class="inner">
+                                        <div class="title">
+                                            <h5>@Model.Questions[i].Title </h5>
+                                        </div>
+                                        <div class="text">@Model.Questions[i].Description</div>
+                                    </div>
+                                </div>
+                                </div>
+                                }
+                            
+                                @for (int i = Model.Questions.Count() / 2; i < (Model.Questions.Count()); i++)
+                                {
+                                        <div class="text-col col-lg-6 col-md-12 col-sm-12">
+                                    <div class="faq-block">
+                                        <div class="inner">
+                                            <div class="title">
+                                                <h5>@Model.Questions[i].Title </h5>
+                                            </div>
+                                            <div class="text">@Model.Questions[i].Description</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                }
+                            
+                        </div>
+                    </div>
+                </div>
+
+                @foreach (QuestionCategory category in Model.QuestionCategories)
+                {
+                    <!--Tab-->
+                    <div class="tab" id="tab-@category.Id">
+                        <div class="tab-inner">
+                            <div class="row clearfix">
+
+                                
+                                    @for (int i = 0; i < (Model.Questions.Where(q => q.QuestionCategory.Id == category.Id).Count())/2; i++)
+                                    {
+                                    <div class="text-col col-lg-6 col-md-12 col-sm-12">
+                                        <div class="faq-block">
+                                            <div class="inner">
+                                                <div class="title">
+                                                    <h5>@Model.Questions[i].Title </h5>
+                                                </div>
+                                                <div class="text">@Model.Questions[i].Description</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    }
+                                
+                                
+                                    @for (int i = Model.Questions.Where(q => q.QuestionCategory.Id == category.Id).Count()/2; i < (Model.Questions.Where(q => q.QuestionCategory.Id == category.Id).Count()) ; i++)
+                                    {
+                                    <div class="text-col col-lg-6 col-md-12 col-sm-12">
+                                    <div class="faq-block">
+                                        <div class="inner">
+                                            <div class="title">
+                                                <h5>@Model.Questions[i].Title </h5>
+                                            </div>
+                                            <div class="text">@Model.Questions[i].Description</div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    }
+                                
+
+                            </div>
+
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--FAQs Section-->
+<section class="faq-one alternate">
+    <div class="auto-container">
+        <div class="title-box centered">
+            <h2><span>Most frequent question</span></h2>
+        </div>
+        <div class="row clearfix">
+            <!--Text Col-->
+            <div class="text-col col-lg-6 col-md-12 col-sm-12">
+                <div class="inner wow fadeInLeft" data-wow-duration="1500ms" data-wow-delay="0ms">
+                    <div class="accordion-box clearfix">
+                        <!--Block-->
+                        @for (int i = 0; i < (Model.MostFrequents.Count()/2) ; i++)
+                        {
+                            <div class="accordion block active-block">
+                                <div class="acc-btn active">@Model.MostFrequents[i].Title<i class="fa-regular fa-angle-down"></i></div>
+                                <div class="acc-content">
+                                    <div class="content">
+                                        <div class="text">@Model.MostFrequents[i].Description</div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        
+                    </div>
+                </div>
+            </div>
+            <!--Text Col-->
+           <div class="text-col col-lg-6 col-md-12 col-sm-12">
+                <div class="inner wow fadeInRight" data-wow-duration="1500ms" data-wow-delay="0ms">
+                    <div class="accordion-box clearfix">
+
+                        @for (int i = Model.MostFrequents.Count() / 2; i < Model.MostFrequents.Count(); i++)
+                        {
+                            <div class="accordion block active-block">
+                                <div class="acc-btn active">@Model.MostFrequents[i].Title<i class="fa-regular fa-angle-down"></i></div>
+                                <div class="acc-content">
+                                    <div class="content">
+                                        <div class="text">@Model.MostFrequents[i].Description</div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--Sponsors Section-->
+<section class="sponsors-one">
+    <div class="auto-container">
+        <div class="carousel-box">
+            <div class="sponsors-carousel owl-theme owl-carousel">
+                <!--Block-->
+                @foreach (Brand item in Model.Brands)
+                {
+                    <div class="sponsor-block">
+                        <div class="inner-box">
+                            <div class="image"><a href="~/assets/#"><img src="~/assets/images/brand/@item.ImageUrl" alt=""></a></div>
+                        </div>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+

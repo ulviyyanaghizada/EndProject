@@ -1,0 +1,69 @@
+﻿@model LoginViewModel
+
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<!-- Banner Section -->
+<section class="inner-banner">
+    <div class="image-layer" style="background-image: url('https://themeim.com/demo/treker/images/background/banner-image-1.jpg');"></div>
+    <div class="auto-container">
+        <div class="content-box">
+            <h2>Login In</h2>
+            <div class="bread-crumb">
+                <ul class="clearfix">
+                    <li><span class="icon-home fa fa-home"></span><a asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li class="current">Login In</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<!--End Banner Section -->
+<!--Login Section-->
+<section class="login-section">
+    <div class="auto-container">
+        <div class="form-box site-form">
+            <div class="login-form">
+                <h5>Login In</h5>
+                <form method="post" >
+                    <div class="row clearfix">
+                        <div class="form-group col-lg-12 col-md-12 col-sm-12">
+                            <div class="f-label">Email Address <i>*</i></div>
+                            <div class="field-inner">
+                                <input asp-for="EmailOrUsername" class="form-control form-control-user" placeholder="Enter Username or Email Address...">
+                                <span asp-validation-for="EmailOrUsername" class="text-primary"></span>
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-12 col-md-12 col-sm-12">
+                            <div class="f-label">Password <i>*</i></div>
+                            <div class="field-inner">
+                                <input asp-for="Password" class="form-control form-control-user" placeholder="Password">
+                                <span asp-validation-for="Password" class="text-primary"></span>
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-12 col-md-12 col-sm-12">
+                            <div class="field-inner clearfix">
+                               
+                                <div class="forgot-pass">
+                                    <a asp-action="ForgotPassword">Forgot your password? </a>
+                                </div>
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-lg-12 col-md-12 col-sm-12">
+                            <button type="submit" class="theme-btn btn-style-two"><span>Login In<i class="icon far fa-angle-right"></i></span></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="lower-link">Don't have a account? <a asp-controller="Account" asp-action="Register">Sign Up</a> Now</div>
+        </div>
+    </div>
+</section>
+
